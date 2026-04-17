@@ -12,10 +12,6 @@ void my_putstr(const char* s) {
     }
 }
 
-void my_printf(const char* fmt, ...) {
-    //TODO
-}
-
 void my_print_int(int n) {
     if (n < 0) {
         my_putchar('-');
@@ -36,6 +32,35 @@ void my_print_int(int n) {
     for (int j = i - 1; j >= 0; j--) {
         my_putchar(buf[j]);
     }
+}
+
+void my_printf(const char* fmt, ...) {
+    va_list args;           
+    va_start(args, fmt);   
+    while (*fmt) {
+        if (*fmt == '%') {
+            fmt++; 
+            switch (*fmt) {
+                case 'd':
+                    my_print_int(va_arg(args, int));
+                    break; 
+                case 's': 
+                    my_putstr(va_arg(args, char*)); 
+                    break; 
+                /*
+                case 'x':
+                    my_print_hex(va_arg(args, unsigned int));
+                    break; 
+                */
+                case 'c': 
+                    my_putchar((char) va_arg(args, int));
+                    break; 
+            }
+        } else { 
+            my_putchar(*fmt);
+        }
+        fmt++; 
+    } 
 }
 
 int main() {
