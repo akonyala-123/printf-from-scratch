@@ -16,6 +16,28 @@ void my_printf(const char* fmt, ...) {
     //TODO
 }
 
+void my_print_int(int n) {
+    if (n < 0) {
+        my_putchar('-');
+        n = -n; 
+    }
+    if (n == 0) {
+        my_putchar('0');
+        return; 
+    }
+
+    char buf[20];
+    int i = 0; 
+    while (n > 0) {
+        buf[i] = '0' + (n % 10);
+        i++; 
+        n /= 10;  
+    }
+    for (int j = i - 1; j >= 0; j--) {
+        my_putchar(buf[j]);
+    }
+}
+
 int main() {
     my_printf("Hello, world!\n");
     my_printf("Number: %d\n", 42);
