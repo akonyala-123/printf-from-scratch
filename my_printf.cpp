@@ -34,6 +34,24 @@ void my_print_int(int n) {
     }
 }
 
+void my_print_hex(unsigned int n) {
+    const char* digits = "0123456789abcdef";
+    if (n == 0) {
+        my_putchar('0');
+        return;
+    }
+    char buf[20];
+    int i = 0; 
+    while (n > 0) {
+        buf[i] = digits[n % 16];
+        i++; 
+        n /= 16; 
+    }
+    for (int j = i - 1; j >= 0; j--) {
+        my_putchar(buf[j]);
+    }
+}
+
 void my_printf(const char* fmt, ...) {
     va_list args;           
     va_start(args, fmt);   
